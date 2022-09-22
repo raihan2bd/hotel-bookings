@@ -1,0 +1,68 @@
+{{template "base".}} {{define "content"}}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <img
+        src="/static/images/marjors-suite.png"
+        class="img-fluid img-thumbnail mx-auto d-block room-image"
+        alt="room-image"
+      />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <h1 class="text-center mt-4">Major's Suite</h1>
+      <p>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt
+        aliquam placeat, exercitationem saepe vel accusamus recusandae, ea ut
+        deserunt officia illo rerum aut veritatis quidem molestiae distinctio ab
+        nam id! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure
+        in magni cupiditate nulla reiciendis eligendi inventore maiores aut
+        dicta sapiente, exercitationem enim aperiam, eos iste asperiores
+        veritatis id! Esse, sequi.
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col text-center">
+      <a href="#!" id="check-availability-btn" class="btn btn-success"
+        >Check Availability</a
+      >
+    </div>
+  </div>
+</div>
+{{end}} {{define "js"}}
+<script>
+  //demo
+  document
+    .getElementById("check-availability-btn")
+    .addEventListener("click", () => {
+      // let myEl = document.getElementById("myParagraph");
+
+      // notify("this is message", "success")
+
+      // notifyModal("My Title", "<em>Hello, World</em>", "success", "My Text For Button")
+
+      let html = `
+      <form id="check-availability-form" action="" method="post" novalidate class="need-validation">
+        <div class="form-row">
+          <div class="col">
+            <div class="form-row" id="reservation-date-modal">
+              <div class="col">
+                <input disabled required class="form-control" type="text" name="start" id="start" placeholder="Arrival"/>
+              </div>
+              <div class="col">
+                <input disabled required class="form-control" type="text" name="end" id="end" placeholder="Departure"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      `;
+
+      attention.custom({ msg: html, title: "Choose your date" });
+    });
+</script>
+{{end}}

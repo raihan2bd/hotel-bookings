@@ -1,0 +1,27 @@
+.my-footer {
+  height: 6rem;
+  background-color: #163b65;
+  margin-top: 1.5em;
+  padding: 1em;
+  color: #fff;
+  font-size: 80%;
+}
+.room-image {
+  max-width: 50%;
+}
+.footer-copyright {
+  display: block;
+}
+
+.redText {
+  color: red;
+}
+.datepicker-picker {
+  z-index: 1000000 !important;
+}
+.swal2-html-container {
+  overflow: visible !important;
+}
+.datepicker-dropdown {
+  position: relative !important;
+}
