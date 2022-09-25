@@ -156,6 +156,18 @@
         }); // end
       }
 
+      {{with .Error}}
+      notify("{{.}}", "error")
+      {{end}}
+
+      {{with .Flash}}
+      notify("{{.}}", "flash")
+      {{end}}
+
+      {{with .Warning}}
+      notify("{{.}}", "warning")
+      {{end}}
+
       // js module
       function Promt() {
         // Toast Func

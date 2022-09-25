@@ -1,5 +1,7 @@
 package models
 
+import "github.com/raihan2bd/bookings/internal/forms"
+
 // TemplateData sent data from handler to templates
 
 type TemplateData struct {
@@ -11,4 +13,5 @@ type TemplateData struct {
 	Warning   string
 	Flash     string
 	Error     string
+	Form      *forms.Form
 }
