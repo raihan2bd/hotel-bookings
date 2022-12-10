@@ -8,10 +8,10 @@ import (
 	"time"
 
 	"github.com/alexedwards/scs/v2"
-	"github.com/raihan2bd/bookings/internal/config"
-	"github.com/raihan2bd/bookings/internal/handler"
-	"github.com/raihan2bd/bookings/internal/models"
-	"github.com/raihan2bd/bookings/internal/render"
+	"github.com/raihan2bd/hotel-go/internal/config"
+	"github.com/raihan2bd/hotel-go/internal/handler"
+	"github.com/raihan2bd/hotel-go/internal/models"
+	"github.com/raihan2bd/hotel-go/internal/render"
 )
 
 const port = ":8080"
@@ -20,6 +20,28 @@ var app config.AppConfig
 var session *scs.SessionManager
 
 func main() {
+	err := run()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// initilizing the server
+	srv := &http.Server{
+		Addr:    port,
+		Handler: routes(&app),
+	}
+
+	fmt.Printf("Server is running on http://localhost%s \n", port)
+
+	err = srv.ListenAndServe()
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	log.Fatal(err)
+
+}
+
+func run() error {
 	// What am i going to put the session
 	gob.Register(models.Reservation{})
 
@@ -39,6 +61,7 @@ func main() {
 	tc, err := render.CreateTemplateCache()
 	if err != nil {
 		log.Fatal("cann't create template cash")
+		return err
 	}
 
 	app.TemplateCache = tc
@@ -49,19 +72,5 @@ func main() {
 	handler.NewHandler(repo)
 
 	render.NewTemplates(&app)
-
-	// initilizing the server
-	srv := &http.Server{
-		Addr:    port,
-		Handler: routes(&app),
-	}
-
-	fmt.Printf("Server is running on http://localhost%s \n", port)
-
-	err = srv.ListenAndServe()
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	log.Fatal(err)
-
+	return nil
 }

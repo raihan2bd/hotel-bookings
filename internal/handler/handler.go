@@ -6,10 +6,10 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/raihan2bd/bookings/internal/config"
-	"github.com/raihan2bd/bookings/internal/forms"
-	"github.com/raihan2bd/bookings/internal/models"
-	"github.com/raihan2bd/bookings/internal/render"
+	"github.com/raihan2bd/hotel-go/internal/config"
+	"github.com/raihan2bd/hotel-go/internal/forms"
+	"github.com/raihan2bd/hotel-go/internal/models"
+	"github.com/raihan2bd/hotel-go/internal/render"
 )
 
 // Repo the reposity use by the handlers

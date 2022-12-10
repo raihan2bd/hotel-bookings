@@ -2,18 +2,20 @@ package render
 
 import (
 	"bytes"
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
 	"path/filepath"
 
 	"github.com/justinas/nosurf"
-	"github.com/raihan2bd/bookings/internal/config"
-	"github.com/raihan2bd/bookings/internal/models"
+	"github.com/raihan2bd/hotel-go/internal/config"
+	"github.com/raihan2bd/hotel-go/internal/models"
 )
 
 var app *config.AppConfig
 var functions = template.FuncMap{}
+var pathToTempaltes = "./templates"
 
 // NewTemplate passing the appconfig data
 func NewTemplates(a *config.AppConfig) {
@@ -60,7 +62,7 @@ func CreateTemplateCache() (map[string]*template.Template, error) {
 	myCache := map[string]*template.Template{}
 
 	// find all pages from templates
-	pages, err := filepath.Glob("./templates/*page.html")
+	pages, err := filepath.Glob(fmt.Sprintf("%s/*page.html", pathToTempaltes))
 
 	// handling err
 	if err != nil {
@@ -78,14 +80,14 @@ func CreateTemplateCache() (map[string]*template.Template, error) {
 		}
 
 		// find the layout template from templates
-		matches, err := filepath.Glob("./templates/*layout.html")
+		matches, err := filepath.Glob(fmt.Sprintf("%s/*layout.html", pathToTempaltes))
 		if err != nil {
 			return myCache, err
 		}
 
 		if len(matches) > 0 {
 			// join the dot form layout template
-			ts, err = ts.ParseGlob("./templates/*layout.html")
+			ts, err = ts.ParseGlob(fmt.Sprintf("%s/*layout.html", pathToTempaltes))
 			if err != nil {
 				return myCache, err
 			}

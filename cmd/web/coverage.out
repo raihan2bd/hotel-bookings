@@ -1,0 +1,10 @@
+mode: set
+github.com/raihan2bd/bookings/cmd/web/main.go:22.13,24.16 2 0
+github.com/raihan2bd/bookings/cmd/web/main.go:29.2,40.16 4 0
+github.com/raihan2bd/bookings/cmd/web/main.go:24.16,26.3 1 0
+github.com/raihan2bd/bookings/cmd/web/main.go:44.18,62.16 10 1
+github.com/raihan2bd/bookings/cmd/web/main.go:67.2,75.12 6 1
+github.com/raihan2bd/bookings/cmd/web/main.go:62.16,65.3 2 0
+github.com/raihan2bd/bookings/cmd/web/middleware.go:17.45,28.2 3 1
+github.com/raihan2bd/bookings/cmd/web/middleware.go:31.50,33.2 1 1
+github.com/raihan2bd/bookings/cmd/web/routes.go:11.49,39.2 17 1
