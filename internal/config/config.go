@@ -12,5 +12,6 @@ type AppConfig struct {
 	InProduction  bool
 	UseCache      bool
 	InfoLog       *log.Logger
+	ErrorLog      *log.Logger
 	Session       *scs.SessionManager
 }

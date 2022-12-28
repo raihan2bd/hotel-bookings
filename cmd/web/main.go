@@ -5,11 +5,13 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/alexedwards/scs/v2"
 	"github.com/raihan2bd/hotel-go/internal/config"
 	"github.com/raihan2bd/hotel-go/internal/handler"
+	"github.com/raihan2bd/hotel-go/internal/helpers"
 	"github.com/raihan2bd/hotel-go/internal/models"
 	"github.com/raihan2bd/hotel-go/internal/render"
 )
@@ -18,6 +20,8 @@ const port = ":8080"
 
 var app config.AppConfig
 var session *scs.SessionManager
+var infoLog *log.Logger
+var errorLog *log.Logger
 
 func main() {
 	err := run()
@@ -48,6 +52,12 @@ func run() error {
 	// I have to change when in production
 	app.InProduction = false
 
+	infoLog = log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
+	app.InfoLog = infoLog
+
+	errorLog = log.New(os.Stdout, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
+	app.ErrorLog = errorLog
+
 	// session
 	session = scs.New()
 	session.Lifetime = 24 * time.Hour
@@ -70,7 +80,7 @@ func run() error {
 	// passing the app config data
 	repo := handler.NewRepo(&app)
 	handler.NewHandler(repo)
-
 	render.NewTemplates(&app)
+	helpers.NewHelpers(&app)
 	return nil
 }
