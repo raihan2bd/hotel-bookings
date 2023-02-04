@@ -1,0 +1,7 @@
+add_foreign_key("room_restrictions", "reservation_id", {"reservaions": ["id"]}, {
+  "on_delete": "cascade",
+  "on_update": "cascade",
+})
+
+add_index("reservaions", "email", {})
+add_index("reservaions", "last_name", {})
