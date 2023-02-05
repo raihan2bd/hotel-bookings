@@ -10,6 +10,7 @@ import (
 
 	"github.com/alexedwards/scs/v2"
 	"github.com/raihan2bd/hotel-go/internal/config"
+	"github.com/raihan2bd/hotel-go/internal/driver"
 	"github.com/raihan2bd/hotel-go/internal/handler"
 	"github.com/raihan2bd/hotel-go/internal/helpers"
 	"github.com/raihan2bd/hotel-go/internal/models"
@@ -24,10 +25,12 @@ var infoLog *log.Logger
 var errorLog *log.Logger
 
 func main() {
-	err := run()
+	db, err := run()
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	db.SQL.Close()
 
 	// initilizing the server
 	srv := &http.Server{
@@ -45,9 +48,12 @@ func main() {
 
 }
 
-func run() error {
+func run() (*driver.DB, error) {
 	// What am i going to put the session
 	gob.Register(models.Reservation{})
+	gob.Register(models.User{})
+	gob.Register(models.Room{})
+	gob.Register(models.Restriction{})
 
 	// I have to change when in production
 	app.InProduction = false
@@ -67,20 +73,29 @@ func run() error {
 
 	app.Session = session
 
+	// connect to database
+	log.Println("Connecting to database...")
+	db, err := driver.ConnectSQL("host=localhost port=5432 dbname=booking user=postgres password=password")
+	if err != nil {
+		log.Fatal("Cannot connect to database! Dying...")
+	}
+
+	log.Println("connected to the database")
+
 	// template cache
 	tc, err := render.CreateTemplateCache()
 	if err != nil {
 		log.Fatal("cann't create template cash")
-		return err
+		return nil, err
 	}
 
 	app.TemplateCache = tc
 	app.UseCache = false
 
 	// passing the app config data
-	repo := handler.NewRepo(&app)
+	repo := handler.NewRepo(&app, db)
 	handler.NewHandler(repo)
 	render.NewTemplates(&app)
 	helpers.NewHelpers(&app)
-	return nil
+	return db, nil
 }

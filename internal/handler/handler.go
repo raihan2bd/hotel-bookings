@@ -8,10 +8,13 @@ import (
 	"net/http"
 
 	"github.com/raihan2bd/hotel-go/internal/config"
+	"github.com/raihan2bd/hotel-go/internal/driver"
 	"github.com/raihan2bd/hotel-go/internal/forms"
 	"github.com/raihan2bd/hotel-go/internal/helpers"
 	"github.com/raihan2bd/hotel-go/internal/models"
 	"github.com/raihan2bd/hotel-go/internal/render"
+	"github.com/raihan2bd/hotel-go/internal/repository"
+	"github.com/raihan2bd/hotel-go/internal/repository/dbrepo"
 )
 
 // Repo the reposity use by the handlers
@@ -20,12 +23,14 @@ var Repo *Repoository
 // Repository is the repository type
 type Repoository struct {
 	App *config.AppConfig
+	DB  repository.DatabaseRepo
 }
 
 // NewRepo create a new repository
-func NewRepo(a *config.AppConfig) *Repoository {
+func NewRepo(a *config.AppConfig, db *driver.DB) *Repoository {
 	return &Repoository{
 		App: a,
+		DB:  dbrepo.NewPostgresRepo(db.SQL, a),
 	}
 }
 
@@ -37,6 +42,7 @@ func NewHandler(r *Repoository) {
 // Home page handler
 func (m *Repoository) Home(w http.ResponseWriter, r *http.Request) {
 
+	m.DB.AllUsers()
 	render.RenderTemplate(w, r, "home.page.html", &models.TemplateData{})
 }
 
