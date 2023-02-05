@@ -95,7 +95,7 @@ func run() (*driver.DB, error) {
 	// passing the app config data
 	repo := handler.NewRepo(&app, db)
 	handler.NewHandler(repo)
-	render.NewTemplates(&app)
+	render.NewRenderer(&app)
 	helpers.NewHelpers(&app)
 	return db, nil
 }
