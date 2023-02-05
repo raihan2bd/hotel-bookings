@@ -30,7 +30,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	db.SQL.Close()
+	defer db.SQL.Close()
 
 	// initilizing the server
 	srv := &http.Server{

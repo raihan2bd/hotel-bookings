@@ -2,10 +2,11 @@ package handler
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"log"
 	"net/http"
+	"strconv"
+	"time"
 
 	"github.com/raihan2bd/hotel-go/internal/config"
 	"github.com/raihan2bd/hotel-go/internal/driver"
@@ -67,11 +68,34 @@ func (m *Repoository) Reservation(w http.ResponseWriter, r *http.Request) {
 // PostReservation handle reservation posting of a reservation form
 func (m *Repoository) PostReservation(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
-
-	err = errors.New("this is an error Messaeg")
 	if err != nil {
 		helpers.ServerError(w, err)
 		return
+	}
+
+	sd := r.Form.Get("start_date")
+	ed := r.Form.Get("end_date")
+
+	// 2020-01-01 input form date format
+	// go time format std Mon Jan 2 15:04:05 MST 2006 (MST is GMT -O700)
+	// or 01/02/ 03:04:05PM '06-0700
+
+	layout := "2006-01-02"
+	startDate, err := time.Parse(layout, sd)
+	if err != nil {
+		helpers.ServerError(w, err)
+	}
+
+	endDate, err := time.Parse(layout, ed)
+	if err != nil {
+		helpers.ServerError(w, err)
+	}
+
+	// convert input roomId to int
+	roomID, err := strconv.Atoi(r.Form.Get("room_id"))
+
+	if err != nil {
+		helpers.ServerError(w, err)
 	}
 
 	reservation := models.Reservation{
@@ -79,6 +103,9 @@ func (m *Repoository) PostReservation(w http.ResponseWriter, r *http.Request) {
 		LastName:  r.Form.Get("last_name"),
 		Phone:     r.Form.Get("phone"),
 		Email:     r.Form.Get("email"),
+		StartDate: startDate,
+		EndDate:   endDate,
+		RoomID:    roomID,
 	}
 
 	form := forms.New(r.PostForm)
@@ -96,6 +123,11 @@ func (m *Repoository) PostReservation(w http.ResponseWriter, r *http.Request) {
 			Data: data,
 		})
 		return
+	}
+
+	err = m.DB.InsertReservation(reservation)
+	if err != nil {
+		fmt.Println("filed to submit")
 	}
 
 	m.App.Session.Put(r.Context(), "reservation", reservation)
