@@ -84,11 +84,13 @@ func (m *Repoository) PostReservation(w http.ResponseWriter, r *http.Request) {
 	startDate, err := time.Parse(layout, sd)
 	if err != nil {
 		helpers.ServerError(w, err)
+		return
 	}
 
 	endDate, err := time.Parse(layout, ed)
 	if err != nil {
 		helpers.ServerError(w, err)
+		return
 	}
 
 	// convert input roomId to int
@@ -96,6 +98,7 @@ func (m *Repoository) PostReservation(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		helpers.ServerError(w, err)
+		return
 	}
 
 	reservation := models.Reservation{
@@ -125,9 +128,24 @@ func (m *Repoository) PostReservation(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = m.DB.InsertReservation(reservation)
+	newReservationID, err := m.DB.InsertReservation(reservation)
 	if err != nil {
 		fmt.Println("filed to submit")
+		return
+	}
+
+	restriction := models.RoomRestriction{
+		StartDate:     startDate,
+		EndDate:       endDate,
+		RoomID:        roomID,
+		ReservationID: newReservationID,
+		RestrictionID: 1,
+	}
+
+	err = m.DB.InsertRoomRestrictions(restriction)
+	if err != nil {
+		helpers.ServerError(w, err)
+		return
 	}
 
 	m.App.Session.Put(r.Context(), "reservation", reservation)
