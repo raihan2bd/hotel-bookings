@@ -18,7 +18,7 @@ func (m *postgresDBRepo) InsertReservation(res models.Reservation) error {
 	defer cancel()
 	fmt.Println(res.RoomID)
 
-	stmt := `INSERT INTO reservaions (first_name, last_name, email, phone, start_date, end_date, room_id, created_at, updated_at) values ($1, $2, $3, $4, $5, $6, $7, $8, $9)`
+	stmt := `INSERT INTO reservations (first_name, last_name, email, phone, start_date, end_date, room_id, created_at, updated_at) values ($1, $2, $3, $4, $5, $6, $7, $8, $9)`
 
 	_, err := m.DB.ExecContext(ctx, stmt,
 		res.FirstName,

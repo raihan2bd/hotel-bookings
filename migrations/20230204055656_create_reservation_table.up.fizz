@@ -1,4 +1,4 @@
-create_table("reservaions") {
+create_table("reservations") {
   t.Column("id", "integer", {"primary": true})
   t.Column("first_name", "string", {"default": ""})
   t.Column("last_name", "string", {"default": ""})
