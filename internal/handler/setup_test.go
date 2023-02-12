@@ -59,7 +59,7 @@ func getRoutes() http.Handler {
 	repo := NewRepo(&app)
 	NewHandler(repo)
 
-	render.NewTemplates(&app)
+	render.NewRenderer(&app)
 
 	// initializing the router form chi
 	router := chi.NewRouter()
