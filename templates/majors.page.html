@@ -62,7 +62,55 @@
       </form>
       `;
 
-      attention.custom({ msg: html, title: "Choose your date" });
+      attention.custom({
+        msg: html,
+        willOpen: () => {
+          const elem = document.getElementById("reservation-date-modal");
+          const rp = new DateRangePicker(elem, {
+            format: "yyyy-mm-dd",
+            showOnFocus: true,
+            minDate: new Date(),
+          });
+        },
+        didOpen: () => {
+          if (c.didOpen !== undefined) {
+            c.didOpen();
+          }
+        },
+        title: "Choose your date",
+        callback: function (result) {
+          console.log("called");
+
+          // store the form data
+          let form = document.getElementById("check-availability-form");
+          let formData = new FormData(form);
+          formData.append("csrf_token", "{{.CSRFToken}}");
+          formData.append('room_id', "2");
+
+          // calling the ajax request
+          fetch("/search-availability-json", {
+            method: "post",
+            body: formData,
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if(data.ok) {
+                attention.custom({
+                  icon: 'success',
+                  showConfirmButton: false,
+                  msg: `<p>Roo is Available!</p>
+                        <p>
+                            <a class="btn btn-primary" href="/book-room?id=${data.room_id}&s=${data.start_date}&e=${data.end_date}">Book Now!</a>
+                        </p>`,
+                })
+              } else {
+               attention.error({
+                msg: "No Availability"
+               })
+              }
+            });
+        },
+      });
     });
 </script>
 {{end}}

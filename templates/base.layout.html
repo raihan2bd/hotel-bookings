@@ -215,14 +215,20 @@
 
         // multiple input
         async function custom(c) {
-          const { msg = "", title = "" } = c;
+          const { msg = "", title = "", showConfirmButton = true } = c;
+          let myIcon = ""
+          if(c.icon) {
+            myIcon = c.icon
+          }
 
           const { value: result } = await Swal.fire({
+            icon: myIcon,
             title,
             html: msg,
             backdrop: false,
             focusConfirm: false,
             showCancelButton: true,
+            showConfirmButton: showConfirmButton,
             willOpen: () => {
               if (c.willOpen !== undefined) {
                 c.willOpen();
@@ -235,8 +241,13 @@
               ];
             },
             didOpen: () => {
-              document.getElementById("start").removeAttribute("disabled");
-              document.getElementById("end").removeAttribute("disabled");
+              const startDate = document.getElementById('start');
+              const endDate = document.getElementById('end');
+
+              if(startDate && endDate) {
+                startDate.removeAttribute('disabled');
+                endDate.removeAttribute('disabled');
+              }
             },
           });
 
