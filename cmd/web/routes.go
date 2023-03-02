@@ -4,37 +4,38 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 	"github.com/raihan2bd/hotel-go/internal/config"
-	"github.com/raihan2bd/hotel-go/internal/handler"
+	"github.com/raihan2bd/hotel-go/internal/handlers"
 )
 
 func routes(app *config.AppConfig) http.Handler {
-	// initializing the router form chi
-	router := chi.NewRouter()
+	mux := chi.NewRouter()
 
-	// middleware will start here
-	router.Use(SessionLoad)
-	router.Use(Nosurf)
+	mux.Use(middleware.Recoverer)
+	mux.Use(NoSurf)
+	mux.Use(SessionLoad)
 
-	// all routes will start here
-	router.Get("/", handler.Repo.Home)
-	router.Get("/about", handler.Repo.About)
-	router.Get("/generals-quaters", handler.Repo.Generals)
-	router.Get("/majors-suite", handler.Repo.Majors)
+	mux.Get("/", handlers.Repo.Home)
+	mux.Get("/about", handlers.Repo.About)
+	mux.Get("/generals-quarters", handlers.Repo.Generals)
+	mux.Get("/majors-suite", handlers.Repo.Majors)
 
-	router.Get("/search-availability", handler.Repo.Availability)
-	router.Post("/search-availability", handler.Repo.PostAvailability)
-	router.Post("/search-availability-json", handler.Repo.AvailabilityJson)
-	router.Get("/choose-room/{id}", handler.Repo.ChooseRoom)
+	mux.Get("/search-availability", handlers.Repo.Availability)
+	mux.Post("/search-availability", handlers.Repo.PostAvailability)
+	mux.Post("/search-availability-json", handlers.Repo.AvailabilityJSON)
+	mux.Get("/choose-room/{id}", handlers.Repo.ChooseRoom)
+	mux.Get("/book-room", handlers.Repo.BookRoom)
 
-	router.Get("/contact", handler.Repo.Contact)
-	router.Get("/make-reservation", handler.Repo.Reservation)
-	router.Post("/make-reservation", handler.Repo.PostReservation)
-	router.Get("/reservation-summary", handler.Repo.ReservationSummary)
+	mux.Get("/contact", handlers.Repo.Contact)
+
+	mux.Get("/make-reservation", handlers.Repo.Reservation)
+	mux.Post("/make-reservation", handlers.Repo.PostReservation)
+	mux.Get("/reservation-summary", handlers.Repo.ReservationSummary)
 
 	//serve static files
 	fileServer := http.FileServer(http.Dir("./static/"))
-	router.Handle("/static/*", http.StripPrefix("/static", fileServer))
+	mux.Handle("/static/*", http.StripPrefix("/static", fileServer))
 
-	return router
+	return mux
 }

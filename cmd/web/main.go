@@ -11,51 +11,46 @@ import (
 	"github.com/alexedwards/scs/v2"
 	"github.com/raihan2bd/hotel-go/internal/config"
 	"github.com/raihan2bd/hotel-go/internal/driver"
-	"github.com/raihan2bd/hotel-go/internal/handler"
+	"github.com/raihan2bd/hotel-go/internal/handlers"
 	"github.com/raihan2bd/hotel-go/internal/helpers"
 	"github.com/raihan2bd/hotel-go/internal/models"
 	"github.com/raihan2bd/hotel-go/internal/render"
 )
 
-const port = ":8080"
+const portNumber = ":8080"
 
 var app config.AppConfig
 var session *scs.SessionManager
 var infoLog *log.Logger
 var errorLog *log.Logger
 
+// main is the main application function
 func main() {
 	db, err := run()
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	defer db.SQL.Close()
 
-	// initilizing the server
+	fmt.Println(fmt.Sprintf("Starting application on port %s", portNumber))
+
 	srv := &http.Server{
-		Addr:    port,
+		Addr:    portNumber,
 		Handler: routes(&app),
 	}
 
-	fmt.Printf("Server is running on http://localhost%s \n", port)
-
 	err = srv.ListenAndServe()
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
 	log.Fatal(err)
-
 }
 
 func run() (*driver.DB, error) {
-	// What am i going to put the session
+	// what am I going to put in the session
 	gob.Register(models.Reservation{})
 	gob.Register(models.User{})
 	gob.Register(models.Room{})
 	gob.Register(models.Restriction{})
 
-	// I have to change when in production
+	// change this to true when in production
 	app.InProduction = false
 
 	infoLog = log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
@@ -64,7 +59,6 @@ func run() (*driver.DB, error) {
 	errorLog = log.New(os.Stdout, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
 	app.ErrorLog = errorLog
 
-	// session
 	session = scs.New()
 	session.Lifetime = 24 * time.Hour
 	session.Cookie.Persist = true
@@ -79,23 +73,21 @@ func run() (*driver.DB, error) {
 	if err != nil {
 		log.Fatal("Cannot connect to database! Dying...")
 	}
+	log.Println("Connected to database!")
 
-	log.Println("connected to the database")
-
-	// template cache
 	tc, err := render.CreateTemplateCache()
 	if err != nil {
-		log.Fatal("cann't create template cash")
+		log.Fatal("cannot create template cache")
 		return nil, err
 	}
 
 	app.TemplateCache = tc
 	app.UseCache = false
 
-	// passing the app config data
-	repo := handler.NewRepo(&app, db)
-	handler.NewHandler(repo)
+	repo := handlers.NewRepo(&app, db)
+	handlers.NewHandlers(repo)
 	render.NewRenderer(&app)
 	helpers.NewHelpers(&app)
+
 	return db, nil
 }
