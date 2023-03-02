@@ -10,8 +10,8 @@ import (
 	"path/filepath"
 
 	"github.com/justinas/nosurf"
-	"github.com/raihan2bd/hotel-go/internal/config"
-	"github.com/raihan2bd/hotel-go/internal/models"
+	"github.com/raihan2bd/bookings/internal/config"
+	"github.com/raihan2bd/bookings/internal/models"
 )
 
 var functions = template.FuncMap{}

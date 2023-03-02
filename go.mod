@@ -1,4 +1,4 @@
-module github.com/raihan2bd/hotel-go
+module github.com/raihan2bd/bookings
 
 go 1.20
 

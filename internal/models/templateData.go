@@ -1,6 +1,6 @@
 package models
 
-import "github.com/raihan2bd/hotel-go/internal/forms"
+import "github.com/raihan2bd/bookings/internal/forms"
 
 // TemplateData sent data from handler to templates
 
@@ -15,4 +15,3 @@ type TemplateData struct {
 	Error     string
 	Form      *forms.Form
 }
-

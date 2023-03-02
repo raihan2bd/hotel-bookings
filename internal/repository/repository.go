@@ -3,7 +3,7 @@ package repository
 import (
 	"time"
 
-	"github.com/raihan2bd/hotel-go/internal/models"
+	"github.com/raihan2bd/bookings/internal/models"
 )
 
 type DatabaseRepo interface {

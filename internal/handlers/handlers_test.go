@@ -11,8 +11,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/raihan2bd/hotel-go/internal/driver"
-	"github.com/raihan2bd/hotel-go/internal/models"
+	"github.com/raihan2bd/bookings/internal/driver"
+	"github.com/raihan2bd/bookings/internal/models"
 )
 
 type postData struct {

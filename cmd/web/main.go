@@ -9,12 +9,12 @@ import (
 	"time"
 
 	"github.com/alexedwards/scs/v2"
-	"github.com/raihan2bd/hotel-go/internal/config"
-	"github.com/raihan2bd/hotel-go/internal/driver"
-	"github.com/raihan2bd/hotel-go/internal/handlers"
-	"github.com/raihan2bd/hotel-go/internal/helpers"
-	"github.com/raihan2bd/hotel-go/internal/models"
-	"github.com/raihan2bd/hotel-go/internal/render"
+	"github.com/raihan2bd/bookings/internal/config"
+	"github.com/raihan2bd/bookings/internal/driver"
+	"github.com/raihan2bd/bookings/internal/handlers"
+	"github.com/raihan2bd/bookings/internal/helpers"
+	"github.com/raihan2bd/bookings/internal/models"
+	"github.com/raihan2bd/bookings/internal/render"
 )
 
 const portNumber = ":8080"
