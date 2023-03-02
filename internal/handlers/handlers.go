@@ -8,14 +8,14 @@ import (
 	"strings"
 	"time"
 
-	"github.com/raihan2bd/hotel-go/internal/config"
-	"github.com/raihan2bd/hotel-go/internal/driver"
-	"github.com/raihan2bd/hotel-go/internal/forms"
-	"github.com/raihan2bd/hotel-go/internal/helpers"
-	"github.com/raihan2bd/hotel-go/internal/models"
-	"github.com/raihan2bd/hotel-go/internal/render"
-	"github.com/raihan2bd/hotel-go/internal/repository"
-	"github.com/raihan2bd/hotel-go/internal/repository/dbrepo"
+	"github.com/raihan2bd/bookings/internal/config"
+	"github.com/raihan2bd/bookings/internal/driver"
+	"github.com/raihan2bd/bookings/internal/forms"
+	"github.com/raihan2bd/bookings/internal/helpers"
+	"github.com/raihan2bd/bookings/internal/models"
+	"github.com/raihan2bd/bookings/internal/render"
+	"github.com/raihan2bd/bookings/internal/repository"
+	"github.com/raihan2bd/bookings/internal/repository/dbrepo"
 )
 
 // Repo the repository used by the handlers

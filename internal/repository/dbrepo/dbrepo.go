@@ -3,8 +3,8 @@ package dbrepo
 import (
 	"database/sql"
 
-	"github.com/raihan2bd/hotel-go/internal/config"
-	"github.com/raihan2bd/hotel-go/internal/repository"
+	"github.com/raihan2bd/bookings/internal/config"
+	"github.com/raihan2bd/bookings/internal/repository"
 )
 
 type postgresDBRepo struct {

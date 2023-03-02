@@ -15,9 +15,9 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/justinas/nosurf"
-	"github.com/raihan2bd/hotel-go/internal/config"
-	"github.com/raihan2bd/hotel-go/internal/models"
-	"github.com/raihan2bd/hotel-go/internal/render"
+	"github.com/raihan2bd/bookings/internal/config"
+	"github.com/raihan2bd/bookings/internal/models"
+	"github.com/raihan2bd/bookings/internal/render"
 )
 
 var app config.AppConfig

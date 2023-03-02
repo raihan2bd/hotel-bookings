@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/raihan2bd/hotel-go/internal/models"
+	"github.com/raihan2bd/bookings/internal/models"
 )
 
 func (m *testDBRepo) AllUsers() bool {
