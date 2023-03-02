@@ -14,7 +14,7 @@ type User struct {
 	UpdatedAt   time.Time
 }
 
-// Room is the room modal
+// Room is the room model
 type Room struct {
 	ID        int
 	RoomName  string
@@ -22,7 +22,7 @@ type Room struct {
 	UpdatedAt time.Time
 }
 
-// Restriction is restriction model
+// Restriction is the restriction model
 type Restriction struct {
 	ID              int
 	RestrictionName string
@@ -45,7 +45,7 @@ type Reservation struct {
 	Room      Room
 }
 
-// RoomRestriction is roomrestriction model
+// RoomRestriction is the room restriction model
 type RoomRestriction struct {
 	ID            int
 	StartDate     time.Time

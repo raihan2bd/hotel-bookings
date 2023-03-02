@@ -6,10 +6,10 @@ import (
 	"testing"
 )
 
-func TestNosurf(t *testing.T) {
+func TestNoSurf(t *testing.T) {
 	var myH myHandler
 
-	h := Nosurf(&myH)
+	h := NoSurf(&myH)
 
 	switch v := h.(type) {
 	case http.Handler:

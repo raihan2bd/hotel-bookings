@@ -15,8 +15,7 @@ func TestRoutes(t *testing.T) {
 
 	switch v := mux.(type) {
 	case *chi.Mux:
-		// do noting
-
+		// do nothing; test passed
 	default:
 		t.Error(fmt.Sprintf("type is not *chi.Mux, type is %T", v))
 	}
