@@ -1,6 +1,6 @@
 module github.com/raihan2bd/hotel-go
 
-go 1.17
+go 1.20
 
 require (
 	github.com/alexedwards/scs/v2 v2.5.0
