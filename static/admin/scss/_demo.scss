@@ -1,0 +1,170 @@
+/* Demo Styles */
+// Add spacing to Boostrap components for demo purpose
+.template-demo {
+  > .btn {
+    @extend .mt-3;
+    @extend .me-2;
+  }
+
+  > .btn-group,
+  >  .btn-group-vertical {
+    @extend .mt-2;
+    @extend .me-2;
+  }
+
+  .progress {
+    margin-top: 1.5rem;
+  }
+
+  > h2,
+   > h3,
+   > h4,
+   > h5,
+   > h6,
+  > h1 {
+    border-top: 1px solid $border-color;
+    padding: 0.5rem 0 0;
+  }
+
+  > .dropdown {
+    display: inline-block;
+    @extend .me-2;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.chartjs-legend {
+  ul {
+    margin-bottom: 0;
+    list-style: none;
+    padding-left: 0;
+    @include display-flex;
+    @include align-items(flex-end);
+    @include flex-direction(column);
+    @include flex-wrap(wrap);
+    li {
+      @include display-flex;
+      @include align-items(center);
+      span {
+        width: 2.25rem;
+        height: 1rem;
+        margin-right: .4rem;
+        display: inline-block;
+        font-size: $default-font-size;
+      }
+    }
+  }
+  .rtl & {
+    ul {
+      padding-right: 0;
+      li {
+        margin-right: 0;
+        margin-left: 8%;
+        span {
+          margin-right: 0;
+          margin-left: 1rem;
+        }
+      }
+    }
+  }
+  &.analytics-legend {
+    ul {
+      padding-left: 0;
+    }
+  }
+}
+
+.documentation {
+  padding-top: 0;
+  max-width: 100%;
+  .content-wrapper {
+    padding-top: 0;
+    min-height: calc(100vh - #{$footer-height});
+  }
+}
+
+.doc-header {
+  position: fixed;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  z-index: 2;
+  background: $content-bg;
+}
+
+.doc-content {
+  padding-top: 157px;
+}
+
+.show {
+  > .btn-out-line-light {
+    .dropdown-toggle {
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+}#proBanner {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+  background: #000;
+  .card-body-padding {
+    padding-top: .55rem ;
+    padding-bottom: .55rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    @media (max-width: 766px) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    }
+  }
+  .buy-now-text {
+    color: $white;
+    @media (max-width: 766px) {
+      font-size: 10px;
+      line-height: 1.5;
+    }
+  }
+  .btn {
+    &.buy-now-btn {
+      background: transparent;
+      color: #88b6ff;
+      border-radius: 10px;
+      // padding: 0.625rem 1.25rem;
+      padding: 1rem 0;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 1rem;
+      @media (max-width: 766px) {
+        min-width: 80px;
+        padding: 1rem .5rem;
+        font-size: 12px;
+      }
+    }
+    &#bannerClose { 
+      i {
+        margin-right: 1rem;
+        font-size: 1.25rem;
+        @media (max-width: 766px) {
+          font-size: 1rem;
+          margin-right: 0;
+        }
+      }
+    }
+  }
+  a {
+    text-decoration: none;
+    i {
+      font-size: 1.25rem;
+      @media (max-width: 766px) {
+        font-size: 1rem;
+      }
+    }
+  }
+  
+}
+.proBanner-padding-top {
+  padding-top: $buy-nowbanner-padding-top !important;
+}
