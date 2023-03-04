@@ -6,7 +6,6 @@
     <strong>Departure</strong> {{humanDate $res.EndDate}}
     <strong>Room</strong> {{$res.Room.RoomName}}
   </p>
-  Show Reservation: {{$res.FirstName}} {{$res.LastName}}
   <form
     action="/admin/reservations/{{$src}}/{{$res.ID}}"
     method="post"
@@ -56,6 +55,24 @@
 
     <input type="submit" class="btn btn-primary" value="Save" />
     <a href="/admin/reservations-{{$src}}" class="btn btn-warning">Cancel</a>
+    <a href="#!" class="btn btn-info" onclick="processRes({{$res.ID}})">Mark as Processed</a>
   </form>
 </div>
+{{end}}
+
+{{define "js"}}
+  {{$src := index .StringMap "src"}}
+  <script>
+    function processRes(id) {
+      attention.custom({
+        icon: 'warning',
+        msg: 'Are you sure?',
+        callback: function (result) {
+          if (result !== false) {
+            window.location.href = "/admin/process-reservation/{{$src}}/" + id;
+          } 
+        }
+      })
+    }
+  </script>
 {{end}}

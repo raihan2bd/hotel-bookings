@@ -31,7 +31,13 @@
     <!-- endinject -->
     <link rel="shortcut icon" href="/static/admin/images/favicon.png" />
 
-    {{block "css" . }} {{end}}
+    {{block "css" . }}
+    <style>
+      .notie-container {
+        z-index: 5000000;
+      }
+    </style>
+    {{end}}
   </head>
   <body>
     <div class="container-scroller">
