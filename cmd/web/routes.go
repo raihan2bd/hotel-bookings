@@ -44,6 +44,8 @@ func routes(app *config.AppConfig) http.Handler {
 		mux.Get("/reservations-new", handlers.Repo.AdminNewReservation)
 		mux.Get("/reservations-all", handlers.Repo.AdminAllReservation)
 		mux.Get("/reservations-calendar", handlers.Repo.AdminReservationCalendar)
+		mux.Get("/reservations/{src}/{id}", handlers.Repo.AdminShowReservation)
+		mux.Post("/reservations/{src}/{id}", handlers.Repo.AdminPostShowReservation)
 	})
 
 	//serve static files
