@@ -123,3 +123,12 @@ func (m *testDBRepo) AllReservations() ([]models.Reservation, error) {
 	return reservations, nil
 
 }
+
+// AllNewReservations return all new reservations with slice of models
+func (m *testDBRepo) AllNewReservations() ([]models.Reservation, error) {
+
+	var reservations []models.Reservation
+
+	return reservations, nil
+
+}

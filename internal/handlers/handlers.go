@@ -476,10 +476,22 @@ func (m *Repository) AdminDashboard(w http.ResponseWriter, r *http.Request) {
 	render.Template(w, r, "admin-dashboard.page.html", &models.TemplateData{})
 }
 
+// AdminNewReservation shows all new reservation to the dashboard
 func (m *Repository) AdminNewReservation(w http.ResponseWriter, r *http.Request) {
-	render.Template(w, r, "admin-new-reservations.page.html", &models.TemplateData{})
+	reservations, err := m.DB.AllNewReservations()
+	if err != nil {
+		helpers.ServerError(w, err)
+		return
+	}
+
+	data := make(map[string]interface{})
+	data["reservations"] = reservations
+	render.Template(w, r, "admin-new-reservations.page.html", &models.TemplateData{
+		Data: data,
+	})
 }
 
+// AdminReservation shows all processed reservation to the dashboard
 func (m *Repository) AdminAllReservation(w http.ResponseWriter, r *http.Request) {
 
 	reservations, err := m.DB.AllReservations()
