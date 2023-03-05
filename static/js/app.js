@@ -64,12 +64,6 @@ function Promt() {
           c.willOpen();
         }
       },
-      preConfirm: () => {
-        return [
-          document.getElementById("start").value,
-          document.getElementById("end").value,
-        ];
-      },
       didOpen: () => {
         const startDate = document.getElementById('start');
         const endDate = document.getElementById('end');
