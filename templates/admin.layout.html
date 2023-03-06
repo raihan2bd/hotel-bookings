@@ -27,59 +27,71 @@
     />
     <link rel="stylesheet" href="/static/css/admin-styles.css" />
 
-    {{block "css" . }}
-    {{end}}
+    {{block "css" . }} {{end}}
   </head>
   <body>
-    <div class="main-container">
-      <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-between align-items-center px-3">
-          <div class="navbar-left">
-            <span class="menu-icon h1 text-white fw-bold"><i class="bi bi-list"></i></span>
-            <a class="brand-logo h1 text-white  text-decoration-none" href="#">Bookings</a>
-          </div>
-          <div class="nav-bar-right">
-            <a class="text-primary text-decoration-none" href="/">Public Site</a>
-          </div>
-        </nav>
-      </header>
-      <main class="container">
-        <div class="row">{{block "content" .}} {{end}}</div>
-      </main>
-      <aside class="aside">
-        <ul>
-          <li>
-            <a href="/">Home</a>
-          </li>
-          <li>
-            <a href="/">Reservations</a>
-          </li>
-          <li>
-            <a href="/">Calendar</a>
-          </li>
-          <li>
-            <a href="/user/logout">Logout</a>
-          </li>
-        </ul>
+    <header class="header bg-dark">
+      <nav
+        class="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-between align-items-center px-3"
+      >
+        <div class="navbar-left">
+          <span class="menu-icon h1 text-white fw-bold"
+            ><i class="bi bi-list"></i
+          ></span>
+          <a class="brand-logo h1 text-white text-decoration-none" href="#"
+            >Bookings</a
+          >
+        </div>
+        <div class="nav-bar-right">
+          <a class="text-primary text-decoration-none" href="/">Public Site</a>
+        </div>
+      </nav>
+    </header>
+    <main class="main d-flex gap-2">
+      <aside class="aside bg-dark">
+        <di class="aside-content">
+          <ul class="items mt-1">
+            <li class="item">
+              <a href="/"><span class="aside-icon">
+                <i class="bi bi-house-door"></i>
+              </span> Home</a>
+            </li>
+            <li class="item dropdown">
+              <a class="dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="aside-icon">
+                  <i class="bi bi-book"></i>
+                </span>Reservations
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><a class="dropdown-item"href="/admin/reservations-new">New Reservations</a></li>
+                <li><a class="dropdown-item" href="/admin/reservations-all">All Reservations</a></li>
+              </ul>
+            </li>
+            <li class="item">
+              <a href="/admin/reservations-calendar"><span class="aside-icon">
+                <i class="bi bi-calendar-date"></i>
+              </span>Reservation Calendar</a>
+            </li>
+            <li class="item">
+              <a href="/user/logout"><span class="aside-icon">
+                <i class="bi bi-box-arrow-right"></i>
+              </span>Logout</a>
+            </li>
+          </ul>
+        </di>
       </aside>
-      <footer class="footer">
-        <div
-          class="d-sm-flex justify-content-center justify-content-sm-between"
-        ></div>
-      </footer>
-    </div>
+      <div class="content">
+        <div class="row">{{block "content" .}} {{end}}</div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div
+        class="d-sm-flex justify-content-center justify-content-sm-between"
+      ></div>
+    </footer>
 
     <!-- plugins:js -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
-      integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- endinject -->
     <script src="https://unpkg.com/notie"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
