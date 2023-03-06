@@ -40,6 +40,12 @@ a {
   top: 4rem;
   bottom: 0;
   overflow-y: scroll;
+  display: none;
+}
+
+.show-aside {
+  display: flex;
+  z-index: 1;
 }
 
 .items {
@@ -77,7 +83,7 @@ a {
 }
 
 .content {
-  margin-left: 250px;
+  margin-left: 0;
   padding: 1rem;
   background: #343A40;
   width: 100%;
@@ -85,6 +91,16 @@ a {
   color: #fff;
 }
 
+
 .notie-container {
   z-index: 5000000;
+}
+
+@media (min-width: 768px  ) {
+  .aside {
+    display: flex;
+  }
+  .content {
+    margin-left: 250px;
+  }
 }

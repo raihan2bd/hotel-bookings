@@ -35,7 +35,7 @@
         class="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-between align-items-center px-3"
       >
         <div class="navbar-left">
-          <span class="menu-icon h1 text-white fw-bold"
+          <span class="menu-icon h1 text-white fw-bold" id="toggle-aside-menu"
             ><i class="bi bi-list"></i
           ></span>
           <a class="brand-logo h1 text-white text-decoration-none" href="#"
@@ -98,6 +98,10 @@
     <script src="/static/js/app.js"></script>
 
     <script>
+      const menuBtn = document.getElementById('toggle-aside-menu');
+      menuBtn.addEventListener('click', () => {
+        document.querySelector('.aside').classList.toggle('show-aside')
+      })
         let attention = Promt();
         function notify(msg, msgType) {
         notie.alert({

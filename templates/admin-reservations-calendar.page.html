@@ -8,7 +8,7 @@
     <h3>{{formatDate $now "January"}} {{formatDate $now "2006"}}</h3>
   </div>
 
-  <div class="float-left">
+  <div class="float-float-start">
     <a
       class="btn btn-sm btn-outline-secondary"
       href='/admin/reservations-calendar?y={{index .StringMap "last_month_year"}}&m={{index .StringMap "last_month"}}'
@@ -16,7 +16,7 @@
     >
   </div>
 
-  <div class="float-right">
+  <div class="float-end">
     <a
       class="btn btn-sm btn-outline-secondary"
       href='/admin/reservations-calendar?y={{index .StringMap "next_month_year"}}&m={{index .StringMap "next_month"}}'
@@ -36,8 +36,8 @@
 
     <h4 class="mt-4">{{.RoomName}}</h4>
 
-    <div class="table-response">
-      <table class="table table-bordered table-sm">
+    <div class="table-responsive">
+      <table class="table table-bordered">
         <tr class="table-dark">
           {{range $index := iterate $dim}}
           <td class="text-center">{{add $index 1}}</td>
