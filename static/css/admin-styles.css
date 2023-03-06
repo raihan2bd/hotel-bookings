@@ -25,10 +25,15 @@ a {
   padding: 4px 8px;
   cursor: pointer;
   margin-right: 0.5rem;
+  
 }
 
 .menu-icon:hover {
   color: #002fff;
+  background: #110f0f;
+}
+
+.menu-active {
   background: #110f0f;
 }
 
@@ -97,6 +102,9 @@ a {
 }
 
 @media (min-width: 768px  ) {
+  .menu-icon {
+    display: none;
+  }
   .aside {
     display: flex;
   }

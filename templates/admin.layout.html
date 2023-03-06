@@ -38,7 +38,7 @@
           <span class="menu-icon h1 text-white fw-bold" id="toggle-aside-menu"
             ><i class="bi bi-list"></i
           ></span>
-          <a class="brand-logo h1 text-white text-decoration-none" href="#"
+          <a class="brand-logo h1 text-white text-decoration-none" href="/"
             >Bookings</a
           >
         </div>
@@ -101,6 +101,7 @@
       const menuBtn = document.getElementById('toggle-aside-menu');
       menuBtn.addEventListener('click', () => {
         document.querySelector('.aside').classList.toggle('show-aside')
+        menuBtn.classList.toggle('menu-active')
       })
         let attention = Promt();
         function notify(msg, msgType) {
