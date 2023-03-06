@@ -1,0 +1,38 @@
+header {
+  grid-area: header;
+}
+
+main {
+  grid-area: main;
+}
+
+footer {
+  grid-area: footer;
+}
+
+aside {
+  grid-area: aside;
+}
+
+.main-container {
+  display: grid;
+  grid-template-areas:
+    'header header header header header header'
+    'aside aside main main main main'
+    'footer footer footer footer footer footer';
+    gap: 1rem;
+}
+
+.menu-icon {
+  padding: 4px 8px;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.menu-icon:hover {
+  color: #002fff;
+  background: #110f0f;
+}
+.notie-container {
+  z-index: 5000000;
+}
