@@ -22,10 +22,21 @@
       href="https://unpkg.com/notie/dist/notie.min.css"
     />
     <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+    <style>
+      .footer-items {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .footer-items a {
+        color: white;
+        font-size: 1rem;
+      }
+    </style>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a class="navbar-brand h1" href="/">Bookings</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -39,14 +50,11 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
             <a class="nav-link" href="/"
               >Home <span class="sr-only">(current)</span></a
             >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/about">About</a>
           </li>
           <li class="nav-item dropdown">
             <a
@@ -68,6 +76,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/search-availability">Book Now</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/contact">Contact</a>
@@ -102,14 +113,29 @@
     <!-- end of nav -->
     {{block "content".}} {{end}}
     <!--Footer-->
-    <footer class="my-footer">
-      <div class="row">
-        <div class="col">Left</div>
-        <div class="col">Middle</div>
-        <div class="col">Right</div>
+    <footer class="my-footer p-3 overflow-hidden">
+      <div class="row overflow-hidden mb-3">
+        <div class="col">
+          <ul class="footer-items">
+            <li><a href="/">Home</a></li>
+            <li><a href="/search-availability">Book Now</a></li>
+          </ul>
+        </div>
+        <div class="col">
+          <ul class="footer-items">
+            <li><a href="/generals-quarters">General's Quarters</a></li>
+            <li><a href="/majors-suite">Major's Suite</a></li>
+          </ul>
+        </div>
+        <div class="col">
+          <ul class="footer-items">
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </div>
       </div>
       <div class="text-center mt-3">
-        <p>Copyright 2022 all right reserved</p>
+        <p>Copyright 2023 all right reserved</p>
       </div>
     </footer>
 
